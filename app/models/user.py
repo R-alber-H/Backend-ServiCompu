@@ -9,7 +9,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
-    password = Column(String, nullable=False)
+    password = Column(String, nullable=True)  
     rol = Column(String, nullable=False, default="cliente")
     address = Column(String, nullable=True)
     create_at = Column(DateTime, default=datetime.utcnow)
