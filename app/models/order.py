@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timezone
 from app.database import Base
 
 class Order(Base):
@@ -12,7 +12,7 @@ class Order(Base):
     address = Column(String, nullable=True)
     state = Column(String, nullable=False, default="pendiente")
     total = Column(Float, nullable=False)
-    create_at = Column(DateTime, default=datetime.utcnow)
+    create_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="orders")
     details = relationship("OrderDetail", back_populates="order")
