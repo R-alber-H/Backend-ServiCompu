@@ -4,6 +4,7 @@ from typing import Optional
 class UserRegister(BaseModel):
     name: str
     email: EmailStr
+    address: Optional[str] = None
 
 class UserResponse(BaseModel):
     id: int

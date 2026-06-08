@@ -18,7 +18,8 @@ class AuthService():
             raise ValueError("El usuario ya esta registrado")
         new_user = User(
             name = user.name,
-            email = user.email
+            email = user.email,
+            address = user.address
         )
         return self.repo_user.create(new_user)
     
@@ -34,6 +35,7 @@ class AuthService():
         )
         self.repo_otp.create(new_otp_code)
         email.send_otp_email(user_email,codigo)
+        return {"message": "Código enviado a tu correo"}
         
     def verify_otp(self,codigo:str,user_email:str):
         code_exists = self.repo_otp.get_valid(user_email,codigo)
@@ -46,4 +48,11 @@ class AuthService():
         data = {"sub": str(user.id), "email": user.email}
         return jwt.create_access_token(data)
     
-    
+    def get_me(self,token:str):
+        payload = jwt.verify_token(token)
+        if not payload:
+            raise ValueError("Token no valido")
+        email = payload.get("email")
+        user = self.repo_user.get_by_email(email)
+        return user
+        
