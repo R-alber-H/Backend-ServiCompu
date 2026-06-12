@@ -20,3 +20,5 @@ class Product(Base):
     attributes = relationship("ProductAttribute", back_populates="product")
     brand = relationship("Brand", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
+    inventory = relationship("Inventory", back_populates="product", uselist=False)
+    product_categories = relationship("ProductCategory", back_populates="product")
