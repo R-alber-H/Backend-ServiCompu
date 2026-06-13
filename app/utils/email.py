@@ -4,11 +4,11 @@ from email.mime.multipart import MIMEMultipart
 from app.core.config import settings
 
 def send_otp_email(email_to: str, code: str):
-    subject = "Tu código de acceso - ServiCompu"
+    subject = "Tu código de acceso - Cyber sac"
 
     body = f"""
     <h2>Hola!</h2>
-    <p>Tu código de acceso para ServiCompu es:</p>
+    <p>Tu código de acceso para Cyber sac es:</p>
     <h1 style="letter-spacing: 8px; color: #2563eb;">{code}</h1>
     <p>Este código expira en <strong>10 minutos</strong>.</p>
     <p>Si no solicitaste este código, ignora este mensaje.</p>

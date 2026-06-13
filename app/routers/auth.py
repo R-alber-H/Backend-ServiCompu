@@ -17,12 +17,12 @@ def get_auth_service(db: Session = Depends(get_db)) -> AuthService:
 
 security = HTTPBearer()
 
-@router.post("/",response_model=UserResponse,status_code=201)
-def create_user(user_data:UserRegister,service: AuthService = Depends(get_auth_service)):
-    try:
-        return service.register(user_data)
-    except ValueError as e:
-        raise HTTPException(status_code=409, detail=str(e))
+# @router.post("/",response_model=UserResponse,status_code=201)
+# def create_user(user_data:UserRegister,service: AuthService = Depends(get_auth_service)):
+#     try:
+#         return service.register(user_data)
+#     except ValueError as e:
+#         raise HTTPException(status_code=409, detail=str(e))
 
 @router.post("/send-otp",status_code=200)
 def send_otp(otp_request:OtpRequest, service:AuthService= Depends(get_auth_service)):
@@ -38,12 +38,6 @@ def verify_otp(otp_verify:OtpVerify, service:AuthService= Depends(get_auth_servi
     except ValueError as e:
         raise HTTPException(status_code=409, detail=str(e))
 
-# @router.get("/me",response_model=UserResponse,status_code=200)
-# def get_me(token: str = Depends(oauth2_scheme), service: AuthService = Depends(get_auth_service)):
-#     try:
-#         return service.get_me(token)
-#     except ValueError as e:
-#         raise HTTPException(status_code=401, detail=str(e))
 @router.get("/me", response_model=UserResponse, status_code=200)
 def get_me(credentials: HTTPAuthorizationCredentials = Depends(security), service: AuthService = Depends(get_auth_service)):
     try:
