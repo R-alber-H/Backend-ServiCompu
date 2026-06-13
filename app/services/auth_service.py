@@ -12,16 +12,16 @@ class AuthService():
         self.repo_user = repo_user
         self.repo_otp = repo_otp
     
-    def register(self, user: UserRegister):
-        user_exists = self.repo_user.get_by_email(user.email)
-        if user_exists:
-            raise ValueError("El usuario ya esta registrado")
-        new_user = User(
-            name = user.name,
-            email = user.email,
-            address = user.address
-        )
-        return self.repo_user.create(new_user)
+    # def register(self, user: UserRegister):
+    #     user_exists = self.repo_user.get_by_email(user.email)
+    #     if user_exists:
+    #         raise ValueError("El usuario ya esta registrado")
+    #     new_user = User(
+    #         name = user.name,
+    #         email = user.email,
+    #         address = user.address
+    #     )
+    #     return self.repo_user.create(new_user)
     
     def send_otp(self,user_email: str):
         user_exists = self.repo_user.get_by_email(user_email)
@@ -45,7 +45,7 @@ class AuthService():
         user = self.repo_user.get_by_email(user_email)
         if not user:
             raise ValueError("El usuario no esta registrado")
-        data = {"sub": str(user.id), "email": user.email}
+        data = {"sub": str(user.id), "email": user.email,"role":user.role.name}
         return jwt.create_access_token(data)
     
     def get_me(self,token:str):
