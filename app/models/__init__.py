@@ -4,3 +4,12 @@ from app.models.product_attribute import ProductAttribute
 from app.models.order import Order
 from app.models.order_detail import OrderDetail
 from app.models.otp_code import OtpCode
+from app.models.roles import Role
+from app.models.brands import Brand
+from app.models.suppliers import Supplier
+from app.models.categories import Category
+from app.models.product_categories import ProductCategory
+from app.models.inventory import Inventory
+from app.models.attributes import Attribute
+from app.models.payment_methods import PaymentMethod
+from app.models.order_status_history import OrderStatusHistory

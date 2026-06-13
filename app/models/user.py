@@ -9,10 +9,11 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     role_id = Column(Integer, ForeignKey("roles.id"), nullable=False)
     name = Column(String, nullable=False)
-    email = Column(String, nullable=False, unique=True)
+    dni = Column(String, nullable=True, unique=True)
+    email = Column(String, nullable=True, unique=True)
+    phone = Column(String, nullable=True)
     password = Column(String, nullable=True)  
     create_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     orders = relationship("Order", back_populates="user")
     role = relationship("Role", back_populates="users")
-    addresses = relationship("UserAddress", back_populates="user")
