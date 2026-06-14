@@ -34,7 +34,8 @@ class AuthService():
             expires_at = datetime.now(timezone.utc)+ timedelta(minutes=10)
         )
         self.repo_otp.create(new_otp_code)
-        email.send_otp_email(user_email,codigo)
+        print(f"OTP generado: {codigo}")
+        # email.send_otp_email(user_email,codigo)
         return {"message": "Código enviado a tu correo"}
         
     def verify_otp(self,codigo:str,user_email:str):
@@ -48,11 +49,9 @@ class AuthService():
         data = {"sub": str(user.id), "email": user.email,"role":user.role.name}
         return jwt.create_access_token(data)
     
-    def get_me(self,token:str):
-        payload = jwt.verify_token(token)
-        if not payload:
-            raise ValueError("Token no valido")
-        email = payload.get("email")
+    def get_me(self, email: str):
         user = self.repo_user.get_by_email(email)
+        if not user:
+            raise ValueError("Usuario no encontrado")
         return user
         

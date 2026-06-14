@@ -9,9 +9,10 @@ class UserRegister(BaseModel):
 class UserResponse(BaseModel):
     id: int
     name: str
-    email: str
-    rol: str
-    address: Optional[str] = None
+    email: Optional[str] = None
+    dni: Optional[str] = None
+    phone: Optional[str] = None
+    role_id: int
 
     class Config:
         from_attributes = True
