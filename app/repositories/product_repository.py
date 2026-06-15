@@ -35,7 +35,7 @@ class ProductRepository:
             .all()
         )
     
-    def get_by_id(self, id:int) -> Product | None:
+    def get_by_id (self, id:int) -> Product | None:
         return(
             self.db.query(Product)
             .options(joinedload(Product.brand))
@@ -43,5 +43,12 @@ class ProductRepository:
             .options(joinedload(Product.inventory))
             .options(joinedload(Product.product_categories).joinedload(ProductCategory.category))
             .filter(Product.id == id)
+            .first()
+        )
+        
+    def get_by_name (self,name: str) -> Product | None:
+        return(
+            self.db.query(Product)
+            .filter(Product.name == name)
             .first()
         )
