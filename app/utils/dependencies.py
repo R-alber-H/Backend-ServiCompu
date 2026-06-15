@@ -14,3 +14,8 @@ def require_admin(payload: dict = Depends(get_current_user)):
     if payload.get("role") != "admin":
         raise HTTPException(status_code=403, detail="Acceso solo para administradores")
     return payload
+
+def require_staff(payload: dict = Depends(get_current_user)):
+    if payload.get("role") not in ["admin", "ventas"]:
+        raise HTTPException(status_code=403, detail="Acceso no autorizado")
+    return payload

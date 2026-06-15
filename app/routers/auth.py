@@ -7,7 +7,6 @@ from app.schemas.otp import OtpRequest, OtpVerify
 from app.schemas.user import  UserResponse
 from app.services.auth_service import AuthService
 # from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
 from app.utils.dependencies import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])

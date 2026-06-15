@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta, timezone
-
 from app.models.otp_code import OtpCode
-from app.models.user import User
+# from app.models.user import User
 from app.repositories.otp_repository import OtpRepository
 from app.repositories.user_repositorry import UserRepository
-from app.schemas.user import UserRegister
+# from app.schemas.user import UserRegister
 from app.utils import email,jwt,otp
 
 class AuthService():

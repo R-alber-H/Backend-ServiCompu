@@ -1,2 +1,2 @@
-from app.schemas.user import UserRegister, UserResponse
+from app.schemas.user import UserResponse
 from app.schemas.otp import OtpRequest, OtpVerify
