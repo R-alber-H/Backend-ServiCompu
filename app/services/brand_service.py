@@ -13,7 +13,7 @@ class BrandService():
         new_brand = Brand(
             name = brand.name
         )
-        return self.create_brand(new_brand)
+        return self.repo.create(new_brand)
     
     def get_all(self):
         return self.repo.get_all()

@@ -6,7 +6,7 @@ from app.schemas.category import CategoryResponse, CategoryCreate
 from app.services.category_service import CategoryService
 from app.utils.dependencies import require_admin, require_staff
 
-router = APIRouter("/",prefix="categories",tags="category")
+router = APIRouter(prefix="/categories",tags=["category"])
 
 def get_category_service(db:Session = Depends(get_db)) -> CategoryService:
     repo_category = CategoryRepository(db) 

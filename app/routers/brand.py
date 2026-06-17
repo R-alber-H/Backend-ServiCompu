@@ -6,7 +6,7 @@ from app.services.brand_service import BrandService
 from app.schemas.brand import BrandResponse, BrandCreate
 from app.utils.dependencies import require_admin, require_staff
 
-router = APIRouter(prefix="/brands", tags="brand")
+router = APIRouter(prefix="/brands", tags=["brand"])
 
 def get_brand_service(db:Session = Depends(get_db)) -> BrandService:
     repo_brand = BrandRepository(db)
@@ -19,6 +19,6 @@ def create_brand(data: BrandCreate,serivce:BrandService = Depends(get_brand_serv
     except ValueError as e:
         raise HTTPException(status_code=409, detail=str(e))
 
-@router.get("/",response_model=list[BrandResponse],status_code=201,dependencies=[Depends(require_staff)])
+@router.get("/",response_model=list[BrandResponse],status_code=200,dependencies=[Depends(require_staff)])
 def get_all(service:BrandService = Depends(get_brand_service)):
     return service.get_all()

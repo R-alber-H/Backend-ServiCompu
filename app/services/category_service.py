@@ -7,8 +7,8 @@ class CategoryService():
        self.repo = repo
     
     def create_category(self, category :CategoryCreate):
-        exists_category = self.repo.get_by_name(category.name)
-        if exists_category:
+        category_exixts = self.repo.get_by_name(category.name)
+        if category_exixts:
             raise ValueError(f"La categoria con nombre {category.name} ya esta registrada")
         
         new_category = Category(
