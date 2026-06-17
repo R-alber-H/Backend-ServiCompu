@@ -1,8 +1,7 @@
-
 from sqlalchemy.orm import Session
-from app.models.brands import Brand
+from app.models.categories import Category
 from app.repositories.base_repository import BaseRepository
 
-class BrandRepository(BaseRepository[Brand]):
+class CategoryRepository(BaseRepository[Category]):
     def __init__(self, db: Session):
-        super().__init__(db, Brand)
+        super().__init__(db, Category)
