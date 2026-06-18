@@ -56,8 +56,12 @@ class ProductRepository:
     def update(self,product:Product,data:dict) -> Product:
         for key, value in data.items():
             setattr(product, key, value)
-            self.db.commit()
+        self.db.commit()
         self.db.refresh(product)
         return product
     
-    
+    def save(self,product:Product):
+        self.db.commit()
+        self.db.refresh(product)
+        return product
+        

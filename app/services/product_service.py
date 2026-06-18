@@ -31,7 +31,14 @@ class ProductService():
     
     def update_product(self,id:int,productUpdate:ProductUpdate):
         product = self.repo_product.get_by_id(id)
-        if product:
+        if not product:
             raise ValueError(f"El producto con id {id} no esta registrado")
         data = productUpdate.model_dump(exclude_none=True)
         return self.repo_product.update(product,data)
+    
+    def toggle_product(self,id: int):
+        product = self.repo_product.get_by_id(id)
+        if not product:
+            raise ValueError(f"El producto con id {id} no esta registrado")
+        product.active = not product.active
+        return self.repo_product.save(product)

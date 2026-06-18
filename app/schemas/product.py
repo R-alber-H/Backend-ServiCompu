@@ -49,5 +49,5 @@ class ProductResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     
 class ProductUpdate(BaseModel):
-    name:str
-    price:float
+    name:str | None = None
+    price:float | None = None
