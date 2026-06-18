@@ -1,6 +1,6 @@
 from app.models.product import Product
 from app.repositories.product_repository import ProductRepository
-from app.schemas.product import ProductCreate
+from app.schemas.product import ProductCreate, ProductUpdate
 
 class ProductService():
     def __init__(self,repo_product:ProductRepository):
@@ -28,3 +28,10 @@ class ProductService():
         if not product:
             raise ValueError(f"El producto con id {id} no esta registrado")
         return product
+    
+    def update_product(self,id:int,productUpdate:ProductUpdate):
+        product = self.repo_product.get_by_id(id)
+        if product:
+            raise ValueError(f"El producto con id {id} no esta registrado")
+        data = productUpdate.model_dump(exclude_none=True)
+        return self.repo_product.update(product,data)

@@ -47,3 +47,7 @@ class ProductResponse(BaseModel):
     inventory: InventoryResponse
     product_categories : list[ProductCategoryResponse]
     model_config = ConfigDict(from_attributes=True)
+    
+class ProductUpdate(BaseModel):
+    name:str
+    price:float
