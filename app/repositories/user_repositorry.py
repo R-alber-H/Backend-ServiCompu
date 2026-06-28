@@ -44,8 +44,12 @@ class UserRepository:
             .first()
         )
     
-    def update(self, user: User) -> User:
+    def update(self, user: User,data:dict) -> User:
+        for key, value in data.items():
+           setattr(user,key,value)
         self.db.commit()
         self.db.refresh(user)
         return user
+    
+        
     

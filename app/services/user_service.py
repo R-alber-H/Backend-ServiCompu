@@ -1,7 +1,7 @@
 from app.models.user import User
 from app.repositories.role_repository import RoleRepository
 from app.repositories.user_repositorry import UserRepository
-from app.schemas.user import CustomerCreate, UserCreate
+from app.schemas.user import CustomerCreate, UserCreate, UserUpdate
 
 
 class UserService():
@@ -36,3 +36,11 @@ class UserService():
     
     def get_all(self):
         return self.repo.get_all()
+    
+    def update_user(self,id:int,user_update:UserUpdate):
+        user = self.repo.get_by_id(id)
+        if not user:
+           raise ValueError(f"El usuario con id {id} no esta registrado") 
+        data = user_update.model_dump(exclude_none=True)
+        return self.repo.update(user,data)
+        
