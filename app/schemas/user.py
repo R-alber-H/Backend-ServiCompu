@@ -11,6 +11,9 @@ class CustomerCreate(BaseModel):
     dni: str
     phone: Optional[str] = None
     email: Optional[EmailStr] = None
+    
+class RoleResponse(BaseModel):
+    name:str
 
 class UserResponse(BaseModel):
     id: int
@@ -18,7 +21,7 @@ class UserResponse(BaseModel):
     email: Optional[str] = None
     dni: Optional[str] = None
     phone: Optional[str] = None
-    role_id: int
+    role: RoleResponse
 
     class Config:
         from_attributes = True
