@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.repositories.product_repository import ProductRepository
-from app.schemas.product import ProductResponse,ProductCreate
+from app.schemas.product import ProductResponse,ProductCreate, ProductUpdate
 from app.services.product_service import ProductService
 from app.utils.dependencies import require_admin,require_staff
 
@@ -29,3 +29,17 @@ def get_by_id(id: int, service: ProductService = Depends(get_product_service)):
         return service.get_by_id(id)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+    
+@router.put("/{id}",response_model=ProductResponse,status_code=200,dependencies=[Depends(require_admin)])
+def update(id:int,data:ProductUpdate, service :ProductService = Depends(get_product_service)):
+    try:
+        return service.update_product(id,data)
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+
+@router.delete("/{id}",response_model=ProductResponse, status_code=200,dependencies=[Depends(require_admin)])
+def delete(id:int,service:ProductService = Depends(get_product_service)):
+    try:
+        return service.toggle_product(id)
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
